@@ -1,0 +1,14 @@
+---
+- name: Создание пользователей в VirtualHub
+  softether_api:
+    hub: "{{ item.hub }}"
+    user: "{{ item.user }}"
+    state: present
+  loop:
+    - { hub: "PROD", user: "pr_user1" }
+    - { hub: "PROD", user: "pr_user2" }
+    - { hub: "TEST", user: "t_user1" }
+    - { hub: "TEST", user: "t_user2" }
+    - { hub: "STAFF", user: "ceo" }
+    - { hub: "STAFF", user: "cto" }
+    - { hub: "STAFF", user: "Admin" }

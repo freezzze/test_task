@@ -1,0 +1,40 @@
+---
+- name: Создание VirtualHub
+  uri:
+    url: "http://localhost:443/api/v1/CreateHub"
+    method: POST
+    body: '{"hub_name": "{{ item }}", "password": "your_password"}'
+    body_format: json
+    return_content: yes
+  loop:
+    - PROD
+    - TEST
+    - STAFF
+
+- name: Создание пользователей в VirtualHub
+  uri:
+    url: "http://localhost:443/api/v1/CreateUser"
+    method: POST
+    body: '{"hub_name": "{{ item.hub }}", "user_name": "{{ item.user }}", "password": "your_password"}'
+    body_format: json
+    return_content: yes
+  loop:
+    - { hub: "PROD", user: "pr_user1" }
+    - { hub: "PROD", user: "pr_user2" }
+    - { hub: "TEST", user: "t_user1" }
+    - { hub: "TEST", user: "t_user2" }
+    - { hub: "STAFF", user: "ceo" }
+    - { hub: "STAFF", user: "cto" }
+    - { hub: "STAFF", user: "Admin" }
+
+- name: Настройка видимости хабов
+  uri:
+    url: "http://localhost:443/api/v1/SetHub"
+    method: POST
+    body: '{"hub_name": "{{ item }}", "is_visible": false}'
+    body_format: json
+    return_content: yes
+  loop:
+    - PROD
+    - TEST
+    - STAFF

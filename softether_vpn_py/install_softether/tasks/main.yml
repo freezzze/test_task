@@ -1,0 +1,11 @@
+---
+- name: Установка SoftEther VPN
+  yum:
+    name: softether-vpnserver
+    state: present
+
+- name: Запуск SoftEther VPN сервера
+  systemd:
+    name: vpnserver
+    state: started
+    enabled: yes

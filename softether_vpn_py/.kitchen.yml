@@ -1,0 +1,37 @@
+driver:
+  name: docker
+
+provisioner:
+  name: ansible_playbook
+  playbook: softether.yml
+  hosts: all
+
+platforms:
+  - name: oraclelinux-8
+    driver:
+      image: oraclelinux:8
+  - name: almalinux-8
+    driver:
+      image: almalinux:8
+  - name: rockylinux-8
+    driver:
+      image: rockylinux:8
+  - name: oraclelinux-9
+    driver:
+      image: oraclelinux:9
+  - name: almalinux-9
+    driver:
+      image: almalinux:9
+  - name: rockylinux-9
+    driver:
+      image: rockylinux:9
+
+suites:
+  - name: default
+    provisioner:
+      name: ansible_playbook
+      playbook: softether.yml
+    verifier:
+      name: inspec
+    inspec_tests:
+      - test/softether_spec.rb

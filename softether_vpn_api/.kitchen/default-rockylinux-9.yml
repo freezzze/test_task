@@ -1,0 +1,9 @@
+---
+username: kitchen
+ssh_key: "/home/freezzze/softether_vpn_api/.kitchen/docker_id_rsa"
+image_id: sha256:e1d245d2380dd6bc66688f2a935835f495f2efa0f11fc056ab1a2b8fbfb3d2ed
+container_id: 4537a67ba2fb6eaa5099bd206e6560c7642813b9eef84624f3784a9352968a22
+hostname: localhost
+port: 32779
+last_action: create
+last_error: Kitchen::ActionFailed

@@ -1,0 +1,7 @@
+---
+- name: Установка и настройка VPN сервера SoftEther
+  hosts: all
+  become: yes
+  roles:
+    - role: install_softether
+    - role: configure_softether
