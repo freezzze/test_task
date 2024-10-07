@@ -1,11 +1,27 @@
 ---
-- name: Установка SoftEther VPN
+- name: Установка зависимостей
   yum:
-    name: softether-vpnserver
+    name:
+      - gcc
+      - make
+      - git
     state: present
 
-- name: Запуск SoftEther VPN сервера
-  systemd:
-    name: vpnserver
-    state: started
-    enabled: yes
+- name: Скачивание SoftEther
+  get_url:
+    url: "https://github.com/SoftEtherVPN/SoftEtherVPN_Stable/releases/download/v4.41-9782-beta/softether-vpnbridge-v4.41-9782-beta-2022.11.17-linux-x64-64bit.tar.gz"
+    dest: /tmp/softether-vpnserver.tar.gz
+
+- name: Распаковка SoftEther
+  unarchive:
+    src: /tmp/softether-vpnserver.tar.gz
+    dest: /usr/local/
+    remote_src: yes
+
+- name: Компиляция SoftEther
+  command: make
+  args:
+    chdir: /usr/local/vpnbridge
+
+- name: Запуск SoftEther
+  command: /usr/local/vpnbridge/vpnbridge start
